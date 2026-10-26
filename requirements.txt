@@ -1,0 +1,43 @@
+# HalluPeer — consolidated requirements (Python 3.10+)
+#
+# The project uses three kinds of workloads. Core packages below are shared by all;
+# vLLM serving and Unsloth fine-tuning pin different torch/transformers versions,
+# so install each of them in its own environment:
+#
+#   # 1) construction pipeline + zero-shot evaluation (talks to a vLLM / OpenAI-compatible server)
+#   pip install -r requirements.txt
+#
+#   # 2) vLLM server (separate env)
+#   pip install vllm==0.20.1
+#
+#   # 3) QLoRA fine-tuning (separate env)
+#   pip install -r requirements.txt unsloth==2026.2.1 torch==2.10.0 transformers==4.56.2 \
+#       trl==0.22.2 peft==0.18.1 bitsandbytes==0.49.2 accelerate==1.12.0 datasets==4.3.0
+
+# ---- core ----
+numpy==2.2.6
+pandas==2.3.3
+scikit-learn==1.7.2
+tqdm==4.67.3
+PyYAML==6.0.3
+omegaconf==2.3.0
+easydict==1.13
+natsort==8.4.0
+requests==2.32.5
+aiohttp==3.13.3
+openpyxl==3.1.5
+beautifulsoup4==4.15.0
+
+# ---- LLM clients / retrieval ----
+openai==2.36.0
+langchain-community==0.3.27
+rank-bm25==0.2.2
+sentence-transformers==5.2.0
+nltk==3.9.2
+spacy==3.8.7
+
+# ---- baselines ----
+refchecker==0.2.17
+
+# ---- analysis viewer (optional) ----
+streamlit==1.57.0

@@ -1,0 +1,37 @@
+# secrets
+*api_key*.txt
+.env
+
+# python / tooling
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+.vscode/
+.DS_Store
+cache/
+unsloth_compiled_cache/
+
+# model checkpoints
+*.ckpt
+*.pt
+*.bin
+*.safetensors
+
+# data and outputs (download data from Hugging Face into dataset/)
+dataset/*
+!dataset/README.md
+evaluation/evaluation_results/
+results/
+*.log
+
+# not released yet
+evaluation/generalization/
+evaluation/human_review_analysis/
+
+# local notes
+release_note.md
+hf_release/
+
+# personal batch runners (single-run scripts are released instead)
+evaluation/task_*/finetune/bash_script/TASK*_bundle_*.sh
+resources/review_aspect/annotation-llm.csv
