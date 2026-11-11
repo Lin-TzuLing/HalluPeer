@@ -135,7 +135,7 @@ See `evaluation/README.md` for all options.
 
 ## License
 
-The code is released under the [Apache License 2.0](LICENSE); the dataset is released under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
+The code is released under the [Apache License 2.0](LICENSE); the dataset is released under [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/) (non-commercial use only; see the dataset card for the third-party paper and review text it contains).
 
 ## Citation
 
