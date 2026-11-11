@@ -1,0 +1,57 @@
+# Configuration file for hallucination taxonomy agents
+
+agents:
+  taxonomy_generator:
+    model_name: "Qwen/Qwen3-32B"  # Model to use for taxonomy generation
+    # base setting
+    max_new_tokens: 4096  # Maximum number of new tokens to generate
+    temperature: 0.0      # Sampling temperature
+    port: 8003
+    think_mode: false     # Whether to enable think mode
+    max_retries: 80        # Maximum number of retries for failed requests
+    retry_delay: 0.1      # Delay between retries in seconds
+
+  review_aspect_tagger:
+    model_name: "meta-llama/Llama-3.3-70B-Instruct"  # Model to use for review aspect tagging
+    max_new_tokens: 512  # Maximum number of new tokens to generate
+    temperature: 0.0      # Sampling temperature
+    port: 8001
+    max_retries: 80        # Maximum number of retries for failed requests
+    retry_delay: 0.1      # Delay between retries in seconds
+    
+  review_filter:
+    model_name: "Qwen/Qwen3-32B"  # Model to use for taxonomy generation
+    # base setting
+    max_new_tokens: 1024  # Maximum number of new tokens to generate
+    temperature: 0.0      # Sampling temperature
+    port: 8003
+    think_mode: false     # Whether to enable think mode
+    max_retries: 80        # Maximum number of retries for failed requests
+    retry_delay: 0.1 
+
+  templates_constructor:
+    model_name: "Qwen/Qwen3-32B"  # Model to use for template construction
+    max_new_tokens: 512  # Maximum number of new tokens to generate
+    temperature: 0.0      # Sampling temperature
+    port: 8004
+    think_mode: false     # Whether to enable think mode
+    max_retries: 80        # Maximum number of retries for failed requests
+    retry_delay: 0.1      # Delay between retries in seconds
+
+  templates_injector:
+    model_name: "Qwen/Qwen3-32B"  # Model to use for template construction
+    max_new_tokens: 1024  # Maximum number of new tokens to generate
+    temperature: 0.0      # Sampling temperature
+    port: 8003
+    think_mode: false     # Whether to enable think mode
+    max_retries: 60        # Maximum number of retries for failed requests
+    retry_delay: 0.1      # Delay between retries in seconds
+
+  post_checker:
+    model_name: "Qwen/Qwen3-32B"  # Model to use for template construction
+    max_new_tokens: 1024  # Maximum number of new tokens to generate
+    temperature: 0.0      # Sampling temperature
+    port: 8003
+    think_mode: false     # Whether to enable think mode
+    max_retries: 60        # Maximum number of retries for failed requests
+    retry_delay: 0.1      # Delay between retries in seconds

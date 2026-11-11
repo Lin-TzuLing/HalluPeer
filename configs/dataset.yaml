@@ -1,0 +1,24 @@
+# configure paths for hallupeer/dataset
+
+dataset:
+    dataset_dir: "../datasets/openreview_data/ICLR2019"
+    # dataset_dir: "../datasets/openreview_data/ICLR2020"
+    # dataset_dir: "../datasets/openreview_data/ICLR2021"
+    # dataset_dir: "../datasets/openreview_data/ICLR2022"
+    # dataset_dir: "../datasets/openreview_data/ICLR2023"
+    # dataset_dir: "../datasets/openreview_data/ICLR2024"
+    # dataset_dir: "../datasets/openreview_data/NeurIPS2021"
+    # dataset_dir: "../datasets/openreview_data/NeurIPS2022"
+    # dataset_dir: "../datasets/openreview_data/NeurIPS2023"
+    batch_size_hallucination_injection: 1
+    batch_size_review_aspect_tagging: 8
+    batch_size_review_filtering: 32
+    batch_size_template_construction: 1
+    batch_size_template_injection: 8
+    shuffle: False
+    num_workers: 4
+
+    # For review filtering
+    prompt_template_path: "review_filtering/review_filtering.txt"
+    path_filter_list: "resources/review_filter/review_filter_list_{venue}.jsonl"
+    usage_path: "resources/review_filter/logs/review_filter_usage_{venue}.json"

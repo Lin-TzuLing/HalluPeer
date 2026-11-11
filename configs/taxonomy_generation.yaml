@@ -1,0 +1,16 @@
+# Configuration file for hallucination taxonomy generation
+
+taxonomy_generation:
+  prompt_template_path: "hallucination_taxonomy/hallucination_taxonomy_desc.txt"  # Path to the prompt template file
+  predefined_nodes_path: "resources/hallucination_taxonomy/predefined_nodes.json"  # Path to predefined nodes JSON file
+  
+  output_taxonomy_path: "results/taxonomy_generation/hallucination_taxonomy_tree_{}.pkl"
+  output_usage_path: "results/taxonomy_generation/logs/hallucination_taxonomy_usage_{}.json"
+
+  max_width: 8  # Maximum width (number of children) per node
+  # max_width: 6  # Maximum width (number of children) per node
+  max_depth: 3  # Maximum depth of the generated taxonomy
+
+  resume: false  # Whether to resume from existing pickle file if it exists
+
+    

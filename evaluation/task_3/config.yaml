@@ -1,0 +1,22 @@
+zero_shot:
+  agent:
+    model_name: "Qwen/Qwen3-32B"
+    max_new_tokens: 256
+    temperature: 0.0
+    port: 8003
+    max_retries: 30
+    retry_delay: 1.0
+    think_mode: false
+    timeout: 120
+    n: 1
+
+  evidence:
+    type: "BM25"   # "no_retrieval" | "BM25"
+    bm25_top_k: 5
+    bm25_chunk_chars: 2000
+    bm25_chunk_overlap: 300
+
+  prompt:
+    path: "evaluation/prompts/task3/task3.txt"
+
+  max_concurrent: 80

@@ -1,0 +1,38 @@
+# secrets
+*api_key*.txt
+.env
+
+# python / tooling
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+.vscode/
+.DS_Store
+cache/
+
+# model checkpoints
+*.ckpt
+*.pt
+*.bin
+*.safetensors
+
+# data and outputs (download data from Hugging Face into dataset/)
+dataset/*
+!dataset/README.md
+evaluation/evaluation_results/
+results/
+*.log
+
+# local-only experiments and scratch files
+evaluation/generalization/
+evaluation/human_review_analysis/
+local_only/
+
+# local notes
+release_note.md
+hf_release/
+
+resources/review_aspect/annotation-llm.csv
+
+# generated review-filter cache (rebuilt on the fly)
+resources/review_filter/

@@ -1,0 +1,114 @@
+hhem:
+  model:
+    model_id: vectara/hallucination_evaluation_model
+    device: null
+    chunk_paper: true
+    tokenizer_id: google/flan-t5-base
+    premise_max_tokens: 1200
+    premise_stride: 200
+    batch_size: 32
+  evidence:
+    type: BM25
+    bm25_top_k: 5
+    bm25_chunk_chars: 2000
+    bm25_chunk_overlap: 300
+  scoring:
+    sentence_level: true
+    aggregate: mean
+    fixed_threshold: 0.5
+    sentence_min_len: 10
+    sentence_max_len: 400
+    train_sweep_step: 0.01
+trueNLI:
+  model:
+    model_id: MoritzLaurer/DeBERTa-v3-large-mnli-fever-anli-ling-wanli
+    device: null
+    use_fp16: true
+    torch_compile: false
+    premise_max_tokens: 400
+    premise_stride: 50
+    max_seq_len: 512
+    batch_size: 64
+  evidence:
+    type: BM25
+    bm25_top_k: 5
+    bm25_chunk_chars: 1400
+    bm25_chunk_overlap: 150
+  scoring:
+    sentence_level: true
+    aggregate: mean
+    fixed_threshold: 0.5
+    sentence_min_len: 10
+    sentence_max_len: 400
+    train_sweep_step: 0.01
+sentli:
+  model:
+    model_id: roberta-large-mnli
+    device: null
+    batch_size: 32
+  evidence:
+    type: BM25
+    bm25_top_k: 5
+    bm25_chunk_chars: 1400
+    bm25_chunk_overlap: 150
+  scoring:
+    mode: topk
+    k: 3
+    ke: null
+    kc: null
+    aggregate: mean
+    fixed_threshold: 0.5
+    sentence_min_len: 10
+    sentence_max_len: 400
+    doc_sentence_min_len: 10
+    doc_sentence_max_len: 400
+    train_sweep_step: 0.01
+ra_llm:
+  agent:
+    model_name: Qwen/Qwen3-32B
+    port: 8003
+    api_key: abc
+    temperature: 0.0
+    max_new_tokens: 8192
+    max_retries: 10
+    retry_delay: 1.0
+    timeout: 120
+    n: 1
+    think_mode: false
+    reasoning_model: false
+  evidence:
+    type: BM25
+    bm25_top_k: 5
+    bm25_chunk_chars: 2000
+    bm25_chunk_overlap: 300
+  scoring:
+    mode: contrast
+  max_concurrent: 80
+refchecker:
+  extractor:
+    model_name: openai/dongyru/Mistral-7B-Claim-Extractor
+    port: 5001
+    api_key: abc
+    batch_size: 8
+  checker:
+    mode: alignscore
+    alignscore:
+      model: roberta-large
+      ckpt_path: alignscore.ckpt
+      device: cuda
+      batch_size: 32
+      evaluation_mode: nli_sp
+    llm:
+      model_name: openai/Qwen/Qwen3-32B
+      port: 5002
+      api_key: abc
+      batch_size: 8
+  evidence:
+    type: BM25
+    bm25_top_k: 5
+    bm25_chunk_chars: 2000
+    bm25_chunk_overlap: 300
+  scoring:
+    aggregate: ratio
+    fixed_threshold: 0.5
+  pipeline_batch_size: 8

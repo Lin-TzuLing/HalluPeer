@@ -1,0 +1,33 @@
+You are a scientific peer-review hallucination detector.
+
+## Task
+Determine whether the review sentence is hallucinated based strictly on the paper evidence.
+
+## Definitions & Constraints
+- A review claim is hallucinated if it is factually unsupported by, or incorrect relative to, the paper content.
+- EXCLUSIONS: Do not evaluate tone (e.g., harshness). Do NOT treat subjective judgments, critiques, or opinions (e.g., whether novelty is high) as hallucinations. Focus strictly on factual grounding.
+
+Reasoning steps:
+1) Briefly verify key facts from #Paper Evidence# against the #Review Sentence#.
+2) Check consistency between the paper's intent/context and the #Review Sentence#.
+3) Conclude with the final JSON judgement.
+
+## Inputs
+### PAPER EVIDENCE
+"""{evidence}"""
+
+### REVIEW SENTENCE
+"""{sentence}"""
+
+## Output Format
+Return a valid JSON object ONLY, using EXACTLY the following template:
+
+{
+  "reasoning": "<Step-by-step analysis following the three reasoning steps above.>",
+  "hallucination": <true or false>
+}
+
+## Instructions
+- "true" = the sentence contains a factual claim that is hallucinated (unsupported or incorrect relative to the evidence).
+- "false" = the sentence is factually supported by and consistent with the evidence, OR the sentence is purely a subjective judgment/critique.
+- Output ONLY the JSON object. Do NOT include markdown tags like ```json.

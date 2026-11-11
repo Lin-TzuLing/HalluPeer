@@ -1,0 +1,48 @@
+You are a compatibility checker for hallucination injection templates in scientific paper reviews.
+
+---
+
+## TASK
+Given a template with four fields, decide whether the hallucination defined by `Hallucination_Instruction` and `Hallucination_Labels` can be coherently injected into `Injection_Sentence` while remaining grounded in `Injection_Aspect`. Output `true` only if ALL conditions below hold. Be strict and conservative.
+
+---
+
+## COMPATIBILITY CONDITIONS
+
+1. **Operational applicability**
+   The operation described in `Hallucination_Instruction` can be concretely performed on `Injection_Sentence` — there must exist a target in the sentence to modify, replace, exaggerate, or fabricate.
+
+2. **Semantic prerequisites of the leaf type**
+   `Hallucination_Labels` is a taxonomy path (root > ... > leaf). The LEAF node defines the specific hallucination type. Its semantic prerequisites must be present in `Injection_Sentence`.
+   Examples:
+     - Number leaf → numeric value present
+     - Entity leaf → named entity that can be swapped
+     - Temporal leaf → tense / modality / time marker
+     - Reasoning leaf → inferential or causal step
+   If the prerequisite is absent, output `false`.
+
+3. **Aspect grounding**
+   Every tag in `Injection_Aspect` must be substantively supported by `Injection_Sentence`. An aspect that the sentence does not actually discuss makes the template incompatible.
+
+4. **Realistic edit**
+   Applying the hallucination must yield a plausible review sentence, not a nonsensical or category-error edit. If the only way to inject the hallucination is to invent unrelated content, output `false`.
+
+---
+
+## INPUT
+Hallucination_Instruction:
+{hallucination_instruction}
+
+Injection_Sentence:
+{injection_sentence}
+
+Hallucination_Labels:
+{hallucination_labels}
+
+Injection_Aspect:
+{injection_aspect}
+
+---
+
+## OUTPUT (STRICT)
+Output exactly one word: `true` or `false`. No explanation, no punctuation, no extra text.

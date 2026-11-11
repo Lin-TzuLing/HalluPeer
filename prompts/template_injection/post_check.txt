@@ -1,0 +1,30 @@
+## TASK:
+You are an expert reviewer specializing in fine-grained semantic comparison of review statements.
+Your task is to determine whether two review sentences are strictly semantically equivalent.
+
+Equivalence (score = 1) should be rare and assigned only in near-identical paraphrase cases.
+In ambiguous cases, choose 0.
+
+## INPUT:
+Review Sentence A:
+{REVIEW_SENTENCE_1}
+
+Review Sentence B:
+{REVIEW_SENTENCE_2}
+
+## CRITERIA:
+The two sentences are semantically equivalent ONLY IF ALL of the following are true:
+- Each sentence fully entails the other.
+- No opinions, facts, or sentiments are added or omitted.
+- No difference in emphasis, scope, certainty, or evaluative strength.
+- No additional qualifiers or implications are introduced.
+- The sentences are fully interchangeable in the same review context.
+
+If ANY difference exists, the equivalence score MUST be 0.
+
+## OUTPUT:
+Return the equivalence score as a single digit:
+- 1: Strict semantic equivalence
+- 0: Not strictly semantically equivalent
+
+Return only: 0 or 1

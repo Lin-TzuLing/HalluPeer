@@ -1,0 +1,68 @@
+You are an expert at aspect-based text classification.
+
+TASK:
+Given a review sentence and a list of candidate aspect labels, identify the SINGLE aspect label that best matches the main focus of the review.
+
+REVIEW SENTENCE:
+"{review_sent}"
+
+ASPECT LABEL SET (fixed and closed):
+$aspect_label_set
+
+INSTRUCTIONS:
+- Choose exactly ONE aspect from the candidate list.
+- Select the aspect that is most semantically relevant to the review sentence.
+- If multiple aspects seem related, choose the one that is the most central or dominant.
+- Do NOT create new aspects.
+- Do NOT explain your reasoning.
+
+OUTPUT FORMAT (STRICT):
+Return a valid JSON dictionary exactly in the following structure:
+{{"Aspects": ["Aspect1", "Aspect2", ...]}}
+
+If no aspect applies:
+{{"Aspects": ["-"]}}
+
+FORMAT CONSTRAINTS:
+- Output must be valid JSON.
+- The key must be exactly "Aspects".
+- Aspect names must exactly match the predefined labels (case-sensitive).
+- Do not include trailing commas, comments, or extra fields.
+- Do not include any text outside the JSON output.
+
+FEW-SHOT EXAMPLES:
+
+REVIEW SENTENCE: The results presented in the paper are significant.
+OUTPUT: {{"Aspects": ["Significance", "Result"]}}
+
+REVIEW SENTENCE: However, authors do not compare their methods against any of the previous works.
+OUTPUT: {{"Aspects": ["Comparison", "Related Work"]}}
+
+REVIEW SENTENCE: The latter is efficient, but the former enables interpretability.
+OUTPUT: {{"Aspects": ["Efficiency", "Interpretation"]}}
+
+REVIEW SENTENCE: In general, I find Experiments II to be much weaker than Experiment I.
+OUTPUT: {{"Aspects": ["Comparison", "Experiment"]}}
+
+REVIEW SENTENCE: (2) The paper does not explain why end-to-end training in the entropy-regularization is necessary.
+OUTPUT: {{"Aspects": ["Training", "Explanation"]}}
+
+REVIEW SENTENCE: Finally, the paper shows that compositional languages generalize better to the held-out validation set.
+OUTPUT: {{"Aspects": ["Generalization", "Findings"]}}
+
+REVIEW SENTENCE: Typo: - Figure 4 caption: "Our variable-resolution inputs prevent**s**..."
+OUTPUT: {{"Aspects": ["Typo"]}}
+
+REVIEW SENTENCE: In the more practical setting of finetuning the model, the attacks are not effective.
+OUTPUT: {{"Aspects": ["Fine-tuning", "Effectiveness"]}}
+
+REVIEW SENTENCE: The evaluation metric is problematic (or at least unclear).
+OUTPUT: {{"Aspects": ["Evaluation", "Clarity", "Metric"]}}
+
+REVIEW SENTENCE: Overall, this work contributes an interesting framework for analysis.
+OUTPUT: {{"Aspects": ["Analysis", "Framework"]}}
+
+REVIEW SENTENCE: I'm confused as to why some of the visualizations in Fig 3 show white bands along the diagonal.
+OUTPUT: {{"Aspects": ["Figure", "Confusion"]}}
+
+The system must strictly follow the specified output format under all circumstances.

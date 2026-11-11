@@ -1,0 +1,12 @@
+# Configuration file for review aspect tagging
+
+review_aspect_tagging:
+  prompt_template_path: "review_aspect_tagging/aspect_tagging.txt"  # Path to the prompt template file
+  
+  type_of_labels: "fine" # Options: "coarse", "fine"
+  # type_of_labels: "coarse" # Options: "coarse", "fine"
+  
+  path_category_aspect_mappings: "resources/review_aspect/aspects-{}.csv"
+  output_path: "results/review_aspect_tagging/review_aspect_tags_{label}_{dataset_venue}.jsonl" 
+  output_usage_path: "results/review_aspect_tagging/logs/review_aspect_tags_usage_{label}_{dataset_venue}.json"
+  

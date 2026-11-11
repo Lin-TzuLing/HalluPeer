@@ -1,0 +1,17 @@
+# Configuration file for hallucination injection template construction
+
+template_construction:
+  taxonomy_path: "dataset/taxonomy/filtered_human.json"  # Final taxonomy tree (download from Hugging Face, see dataset/README.md)
+  max_depth_load: 3  # Maximum depth to load from the taxonomy tree
+
+  type_of_aspect_tagging_label: "fine"  # Type of aspect tagging label to use ("coarse" or "fine")
+  review_aspect_tagging_results_path: "results/review_aspect_tagging/review_aspect_tags_{type_of_aspect_tagging_label}_{venue}.jsonl"  # Path to the aspect tagging results file
+
+  prompt_template_path: "template_construction/template_construction.txt"  # Path to the prompt template file
+  prefilter_prompt_template_path: "template_construction/taxonomy_prefilter.txt"  # Stage-1 pre-filter prompt; set to null to skip pre-filtering
+
+  output_path: "results/template_construction_sample{template_sample_size}/hallucination_templates_{venue}.jsonl"
+  output_usage_path: "results/template_construction_sample{template_sample_size}/logs/hallucination_template_usage_{venue}.json"
+
+  batch_size_feasible_check: 32  # Batch size for feasible template construction checking
+  batch_size_prefilter: 32       # Batch size for stage-1 pre-filter

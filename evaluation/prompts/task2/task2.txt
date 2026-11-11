@@ -1,0 +1,31 @@
+You are a scientific peer-review hallucination detector.
+
+## Task
+Given a review sentence that has ALREADY been judged as hallucinated, classify the hallucination TYPE using the provided taxonomy labels.
+
+## Definitions & Constraints
+- The categories are mutually exclusive (MECE). 
+- You must rely strictly on the provided operational definitions in the HALLUCINATION LABELS, not just the label names.
+
+## Inputs
+### HALLUCINATION LABELS
+"""{label_space}"""
+
+### PAPER EVIDENCE
+"""{evidence}"""
+
+### REVIEW SENTENCE
+"""{sentence}"""
+
+## Output Format
+Return a valid JSON object ONLY, using EXACTLY the following template:
+
+{
+  "label": "<concept>"
+} 
+
+## Instructions
+- The sentence is confirmed to be hallucinated. You MUST choose exactly ONE label corresponding to the "concept" field in the HALLUCINATION LABELS. 
+- Do NOT return "None" or invent new labels.
+- If multiple labels seem plausible, choose the most specific one that aligns with the observable textual errors in the review sentence.
+- Output ONLY the JSON object. Do NOT include markdown tags like ```json.

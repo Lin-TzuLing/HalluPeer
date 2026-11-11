@@ -1,0 +1,64 @@
+You are an expert in semantic taxonomy alignment.
+
+Your task is to determine whether two taxonomy nodes are near-synonyms, considering:
+- concept meaning
+- concept descriptions
+- hierarchical context (ancestor path)
+- level of abstraction (depth)
+
+Two nodes are considered "near-synonyms" ONLY IF:
+- They refer to the same or almost identical concept in this taxonomy context
+- They would be redundant if both kept in the same tree
+- Differences in wording do NOT imply different scope or abstraction
+
+---
+
+### Node A
+- Concept: {concept_A}
+- Description: {description_A}
+- Ancestor Path (root → node): {path_A}
+- Depth: {depth_A}
+
+### Node B
+- Concept: {concept_B}
+- Description: {description_B}
+- Ancestor Path (root → node): {path_B}
+- Depth: {depth_B}
+
+---
+
+### Instructions
+
+Step 1: Compare semantic meaning ignoring wording differences.
+
+Step 2: Compare taxonomy context:
+- Are they under similar parent concepts?
+- Do they represent the same level of abstraction?
+- Would merging them break the taxonomy structure?
+
+Step 3: Decide:
+
+Output in JSON format:
+
+{
+  "is_synonym": True/False,
+  "keep": "A" | "B" | "NA",
+  "explanation": "string or NA"
+}
+
+Rules:
+- If False:
+  - keep = "NA"
+  - explanation = "NA"
+
+- If True:
+  - Choose the node that is:
+    * more precise
+    * better aligned with its ancestor path
+    * more consistent with taxonomy naming style
+
+  - explanation must include:
+    * why they are synonyms
+    * why the chosen node is better in context
+
+Be strict: do NOT mark as synonyms if there is any meaningful difference in scope, abstraction level, or taxonomy role.

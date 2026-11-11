@@ -1,0 +1,15 @@
+# configure paths for hallupeer/parse_papers
+
+parse:
+  raw_paper_pdfs: # Directory containing raw PDF files of papers
+  - "../datasets/openreview_data/ICLR2019/paper"
+  - "../datasets/openreview_data/ICLR2020/paper"
+  - "../datasets/openreview_data/ICLR2021/paper"
+  - "../datasets/openreview_data/ICLR2022/paper"
+  - "../datasets/openreview_data/ICLR2023/paper"
+  - "../datasets/openreview_data/ICLR2024/paper"
+  - "../datasets/openreview_data/NeurIPS2021/paper"
+  - "../datasets/openreview_data/NeurIPS2022/paper"
+  - "../datasets/openreview_data/NeurIPS2023/paper"
+  - "../datasets/openreview_data/NeurIPS2024/paper"
+  parse_log: "logs/parsing_papers/parse_logs"  # Directory to store parsing logs

@@ -1,0 +1,96 @@
+You are an expert in Large Language Model (LLM) hallucination taxonomy construction for scientific paper reviews.
+
+Your task is to decompose a given parent hallucination concept into operationally distinguishable child concepts at a specified taxonomy depth.
+
+The goal is to construct a taxonomy that is analytically rigorous, MECE-compliant, and suitable as an annotation label space. The taxonomy must support reliable human annotation and reviewer agreement.
+
+A critical requirement is that concept boundaries are clear and enforceable based on observable review text, not abstract error theory.
+
+## TASK OVERVIEW
+Given a parent hallucination concept, generate child concepts that represent concrete hallucination realization patterns at the current taxonomy depth.
+
+Each child concept must be defined by:
+- a concise and stable concept name (used as the annotation label), and
+- an operational concept description that explains how the hallucination manifests in review text.
+
+The focus is strictly on *textually observable hallucination patterns in reviews*, not on model intent, generation causes, or abstract error classes.
+
+## INPUT SLOTS
+
+- Ancestor Path (from root to parent, ordered from most general to most specific):
+Use this to calibrate how much narrowing each level represents, and match that pace for the children you generate.
+{ancestor_path}
+
+- Parent Concept (Dictionary):
+{{
+  "concept": {parent_concept},
+  "description": {parent_concept_desc}
+}}
+
+- Current Taxonomy Depth:
+{current_depth}
+
+- Existing Sibling Concepts at This Depth (List of Dictionaries, for MECE checking):
+Each sibling concept is provided as:
+[
+  {{
+    "concept": "...",
+    "description": "..."
+  }},
+  ...
+]
+{sibling_concepts}
+
+- Maximum Number of Child Concepts to Generate:
+{max_width}
+
+## GENERATION CONSTRAINTS
+
+1. MECE Compliance  
+- Each generated child concept must be mutually exclusive with all provided sibling concepts at this depth.
+- The set of generated child concepts must collectively exhaust the parent concept.
+- Distinctions must be justified at the level of observable textual evidence in review text.
+
+2. Operational Specificity  
+Each child concept description must explicitly specify:
+- What aspect of the paper is hallucinated (e.g., method, result, experiment, motivation, comparison, conclusion).
+- How it is hallucinated (e.g., fabrication, attribute substitution, unsupported extension, semantic distortion).
+- Typical linguistic cues or claim structures in the review text that indicate this hallucination.
+
+3. Depth Awareness  
+- Use current depth AND ancestor path together to determine abstraction level.
+  - Shallow depths (depth 2): generate abstract categorical distinctions.
+  - Deeper depths (depth 3+): permit concrete, instance-level distinctions only when the parent is already an appropriately narrow category.
+- Do NOT jump to instance-level specifics at intermediate depths. If concrete variants exist, first define the abstract category that contains them; defer the instances to the next level down.
+- Child concepts should be parallel in granularity to existing siblings.
+
+4. Minimality  
+- Generate only the minimum number of child concepts required to fully cover the parent concept.
+- Avoid stylistic variants or overlapping distinctions that are not operationally enforceable.
+
+## OUTPUT FORMAT
+The output MUST be a single JSON array.
+
+If child concepts are generated, return an array of objects, each representing one immediate child concept:
+
+[
+  {{
+    "concept": "<canonical label>",
+    "description": "<operational definition based on observable review text>"
+  }}
+]
+
+Field constraints:
+- concept:
+  - Short, stable, canonical label
+  - Noun phrase only
+  - No punctuation, qualifiers, or examples
+
+- description:
+  - Single sentence only (no lists, no commentary, no causal speculation)
+  - Operational definition grounded in textually observable review content
+  - Specifies what aspect of the paper is hallucinated and how it manifests in review text
+
+If the parent concept is atomic at the current taxonomy depth, return:
+
+[]

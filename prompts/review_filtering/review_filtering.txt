@@ -1,0 +1,56 @@
+You are an expert in academic peer-review analysis.
+
+Your task is to determine whether the meta review substantively adopted
+the core opinion of a specific reviewer.
+
+You will be given information about ONE reviewer only.
+Do NOT consider other reviewers except as reflected in the meta review.
+
+---
+
+### Input
+
+[Reviewer Review]
+{reviewer_review}
+
+[Meta Review]
+{meta_review}
+
+---
+
+### Instructions
+
+1. Identify the reviewer's core opinion, i.e., the main reasons for acceptance or rejection.
+2. Examine whether the meta review:
+   - explicitly endorses or echoes these points, OR
+   - implicitly relies on them in its reasoning, OR
+   - explicitly rejects or ignores them.
+3. If the meta review adopts the same reasoning even without mentioning the reviewer explicitly,
+   this still counts as adoption.
+
+---
+
+### Output Format (strictly follow)
+
+Return a valid JSON object ONLY, using EXACTLY the following template.
+You must fill in the values but MUST NOT change any key names.
+
+{{
+  "adopted": <true | false>,
+  "confidence": "<high | medium | low>",
+  "justification": "<one concise sentence explaining how the meta review does or does not adopt the reviewer's core opinion.>"
+}}
+
+---
+
+### Decision Criteria
+
+- adopted = true:
+  The meta review clearly or implicitly incorporates the reviewer’s core arguments
+  as part of its justification.
+
+- adopted = false:
+  The meta review explicitly contradicts the reviewer’s core arguments,
+  ignores their main concerns, or reaches a decision based on different reasoning.
+
+- If the evidence is indirect or ambiguous, lower the confidence accordingly.

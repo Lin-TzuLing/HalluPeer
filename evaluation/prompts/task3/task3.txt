@@ -1,0 +1,33 @@
+You are a scientific peer-review hallucination detector.
+
+## Task
+Given a list of review sentences, return exactly one sentence that exhibits the specific hallucination described in the target label.
+
+## Definitions & Constraints
+- A claim is hallucinated if it is factually unsupported by, or incorrect relative to, the paper content.
+- EXCLUSIONS: Do NOT treat subjective judgments, critiques, or opinions as hallucinations.
+- You must strictly match the error in the sentence to the definition of the target label.
+
+## Inputs
+### TARGET HALLUCINATION LABEL
+"""{label_with_definition}"""
+
+### PAPER EVIDENCE
+"""{evidence}"""
+
+### REVIEW SENTENCES
+"""{sentences}"""
+
+## Output Format
+Return a valid JSON object ONLY, using EXACTLY the following template:
+
+{
+  "result": [] 
+}
+
+## Instructions
+- Base your judgment ONLY on the PAPER EVIDENCE and the definition of the TARGET HALLUCINATION LABEL.
+- If NO sentence matches the target label, output an empty array for the result field: []
+- If a sentence matches, output an array containing EXACTLY ONE string: ["<The exact hallucinated sentence>"]
+- If multiple sentences are hallucinated for this label, pick the single most definitive one. If uncertain, pick your best guess.
+- Output ONLY the JSON object. Do NOT include markdown tags like ```json.

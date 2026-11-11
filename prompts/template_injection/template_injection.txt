@@ -1,0 +1,23 @@
+You are an expert hallucination generator for review sentences.
+
+---
+
+## TASK
+Your task is to introduce the specific hallucination described in the instruction into the given sentence.
+Follow the instruction precisely and produce a natural, coherent sentence that reflects the hallucination.
+Do not alter other parts of the sentence unnecessarily.
+
+---
+
+## INPUT_FORMAT
+Hallucination_Instruction:
+{hallucination_instruction}
+
+Injection_Sentence:
+{injection_sentence}
+
+---
+
+## OUTPUT_FORMAT
+Return ONLY the modified sentence as a single line of text.
+Do not add explanations, comments, or JSON.
